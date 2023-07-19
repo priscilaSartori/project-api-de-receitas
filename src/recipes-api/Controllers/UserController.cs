@@ -12,39 +12,46 @@ namespace recipes_api.Controllers;
 [ApiController]
 [Route("user")]
 public class UserController : ControllerBase
-{    
-    public readonly IUserService _service;
-    
-    public UserController(IUserService service)
+{
+  public readonly IUserService _service;
+
+  public UserController(IUserService service)
+  {
+    this._service = service;
+  }
+
+  // 6 - Sua aplicação deve ter o endpoint GET /user/:email
+  [HttpGet("{email}", Name = "GetUser")]
+  public IActionResult Get(string email)
+  {
+    var user = this._service.GetUser(email);
+
+    if (user == null)
     {
-        this._service = service;        
+      return NotFound();
     }
 
-    // 6 - Sua aplicação deve ter o endpoint GET /user/:email
-    [HttpGet("{email}", Name = "GetUser")]
-    public IActionResult Get(string email)
-    {                
-        throw new NotImplementedException();
-    }
+    return Ok(user);
+  }
 
-    // 7 - Sua aplicação deve ter o endpoint POST /user
-    [HttpPost]
-    public IActionResult Create([FromBody]User user)
-    {
-        throw new NotImplementedException();
-    }
+  // 7 - Sua aplicação deve ter o endpoint POST /user
+  [HttpPost]
+  public IActionResult Create([FromBody] User user)
+  {
+    throw new NotImplementedException();
+  }
 
-    // "8 - Sua aplicação deve ter o endpoint PUT /user
-    [HttpPut("{email}")]
-    public IActionResult Update(string email, [FromBody]User user)
-    {
-        throw new NotImplementedException();
-    }
+  // "8 - Sua aplicação deve ter o endpoint PUT /user
+  [HttpPut("{email}")]
+  public IActionResult Update(string email, [FromBody] User user)
+  {
+    throw new NotImplementedException();
+  }
 
-    // 9 - Sua aplicação deve ter o endpoint DEL /user
-    [HttpDelete("{email}")]
-    public IActionResult Delete(string email)
-    {
-        throw new NotImplementedException();
-    } 
+  // 9 - Sua aplicação deve ter o endpoint DEL /user
+  [HttpDelete("{email}")]
+  public IActionResult Delete(string email)
+  {
+    throw new NotImplementedException();
+  }
 }
