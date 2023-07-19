@@ -47,7 +47,8 @@ public class RecipesController : ControllerBase
   [HttpPost]
   public IActionResult Create([FromBody] Recipe recipe)
   {
-    throw new NotImplementedException();
+    this._service.AddRecipe(recipe);
+    return CreatedAtRoute("GetRecipe", new { name = recipe.Name }, recipe);
   }
 
   // 4 - Sua aplicação deve ter o endpoint PUT /recipe
